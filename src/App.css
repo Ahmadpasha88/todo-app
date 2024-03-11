@@ -1,0 +1,13 @@
+.App{
+  background-color: #45475A;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  overflow: auto;
+}
+
+.button-todo-background{
+  background-color: #6273A4;
+}
+
+
