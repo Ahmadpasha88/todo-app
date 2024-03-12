@@ -8,8 +8,14 @@ function App() {
   const [taskName, setTaskName] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [editedTask, setEditedTask] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleAddTask = () => {
+    if (!taskName) {
+      setErrorMsg(() => "This field is required...");
+      return false;
+    }
+    setErrorMsg(() => "");
     if (taskName.trim() !== "") {
       const matches = taskName.match(/(.+?)\s*(\d+)?$/);
       const task = matches[1];
@@ -53,7 +59,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Todo App</h1>
+      <h1 className="fw-bold">Day Goals!</h1>
       <div className="my-3">
         <div>
           <input
@@ -72,6 +78,7 @@ function App() {
           Add Task
         </button>
       </div>
+      <p className="text-danger fw-medium">{errorMsg}</p>
       <div>
         {tasks.map((task, index) => (
           <div className="task" key={index}>
@@ -93,7 +100,7 @@ function App() {
             ) : (
               <div className="my-3 py-1 gap-2 border border-2 col-10 col-md-8 col-lg-6 m-auto rounded-3 button-todo-background">
                 <span className="fw-bold mx-2 fs-3">{task.name}</span>
-                <span className="">Update Count: {task.updates}</span>
+                <span className="">(Changed: {task.updates} times)</span>
                 <button
                   className="m-2 border-0 bg-transparent"
                   onClick={() => handleEditTask(index)}
